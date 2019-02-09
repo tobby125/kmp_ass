@@ -25,11 +25,12 @@ void stress_test(int N, int M){
     int n = rand() % (N-3) + 3;      // Returns a pseudo-random integer between 3 and N.
 	int m = rand() % M + 1; 
     
-	char *text = malloc(n);
+	char *text = malloc(n+1);
     for (int i=0; i<n; i++){
 	  int pos = rand() % (int)(sizeof(charset) -1);
       text[i] = charset[pos];      
     }
+	text[n] = '\0';
 	
 	char *pattern = malloc(m);
     for (int i=0; i<m; i++){
