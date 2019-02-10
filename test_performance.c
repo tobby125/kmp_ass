@@ -5,29 +5,31 @@
 
 int main() {
 	char chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	for (int n = 10000; n <= 10000000; n += 50000) {
+	for (int n = 10000; n <= 1000000; n += 50000) {
 		
-		char text[n];
+		char *text = malloc(n + 1);
 		for (int i = 0; i < n; i++) {
-			text[i] = chars[rand() % sizeof(chars)];	
+			text[i] = chars[rand() % sizeof(chars) - 1];	
 		}
 		
-		char pattern[400];
+		char *pattern = malloc(401);
 		for (int i = 0; i < 400; i++) {
-			pattern[i] = chars[rand() % sizeof(chars)];
+			pattern[i] = chars[rand() % sizeof(chars) - 1];
 		}
 		
-		clock_t begin = clock();
+		double begin = clock();
 		string_matching_naive(text, n, pattern, 400);
-		clock_t end = clock();
+		double end = clock();
 		double naive_runtime = (end - begin) / CLOCKS_PER_SEC;
 		
-		clock_t begin2 = clock();
+		double begin2 = clock();
 		string_matching_kmp(text, n, pattern, 400);
-		clock_t end2 = clock();
+		double end2 = clock();
 		double kmp_runtime = (end2 - begin2) / CLOCKS_PER_SEC;
 		
-		printf("Text length %d runtime- naive: %f, kmp: %f", n, naive_runtime, kmp_runtime);
+		printf("Text length %d runtime- naive: %f, kmp: %f\n", n, naive_runtime, kmp_runtime);
+		free(text);
+		free(pattern);
 	}
 	return 0;
 }
