@@ -1,9 +1,9 @@
 Exception: STATUS_STACK_OVERFLOW at eip=00401667
 eax=0000A230 ebx=0062CA00 ecx=00432A00 edx=0000000F esi=00000010 edi=0062CC08
-ebp=0062CC58 esp=0062C9F4 program=C:\Users\tobby\kmp_ass\a.exe, pid 47924, thread 
+ebp=0062CC58 esp=0062C9F4 program=C:\Users\tobby\kmp_ass\test_performance.exe, pid 41512, thread 
 cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
 Stack trace:
 Frame     Function  Args
-0062CC58  00401667 (612CDD92, 0062CD74, 0062CD18, 61009EA2)
+0062CC58  00401667 (612CEC2A, 00000061, 0062CD18, 61009EA2)
 0062CD18  61009EA2 (00000000, 0062CD74, 61008DC0, 00000000)
 End of stack trace
