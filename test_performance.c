@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <time.h>
+#include <sys/time.h>
 #include <stdlib.h>
 #include "string_matching.h"
 
@@ -17,15 +17,19 @@ int main() {
 			pattern[i] = chars[rand() % sizeof(chars) - 1];
 		}
 		
-		double begin = clock();
-		string_matching_naive(text, n, pattern, 400);
-		double end = clock();
-		double naive_runtime = (end - begin) / CLOCKS_PER_SEC;
+		struct timeval begin, end, begin2, end2;
 		
-		double begin2 = clock();
+		gettimeofday (&begin, NULL);
+		string_matching_naive(text, n, pattern, 400);
+		gettimeofday (&end, NULL);
+		double naive_runtime = (end.tv_sec - begin.tv_sec)
+           + (end.tv_usec - begin.tv_usec) / 1000000.;
+		
+		gettimeofday (&begin2, NULL);
 		string_matching_kmp(text, n, pattern, 400);
-		double end2 = clock();
-		double kmp_runtime = (end2 - begin2) / CLOCKS_PER_SEC;
+		gettimeofday (&end2, NULL);
+		double kmp_runtime = (end2.tv_sec - begin2.tv_sec)
+           + (end2.tv_usec - begin2.tv_usec) / 1000000.;
 		
 		printf("Text length %d runtime- naive: %f, kmp: %f\n", n, naive_runtime, kmp_runtime);
 		free(text);
